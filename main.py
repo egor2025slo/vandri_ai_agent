@@ -91,6 +91,16 @@ async def shutdown():
     await database.disconnect()
     logger.info("Database connection closed.")
 
+@app.get("/")
+async def health_check():
+    """
+    Simple health check endpoint for load balancers.
+    """
+    return {
+        "status": "healthy", 
+        "service": "vandri-ai-agent",
+        "timestamp": datetime.datetime.now().isoformat()
+    }
 
 # --- ENDPOINTS ---
 
